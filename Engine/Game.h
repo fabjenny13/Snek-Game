@@ -23,6 +23,7 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Graphics.h"
+#include "Board.h"
 
 class Game
 {
@@ -42,5 +43,15 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
+	int leftBound = 10;
+	int rightBound = gfx.ScreenWidth - leftBound;
+	int upBound = 10;
+	int downBound = gfx.ScreenHeight - upBound;
+	int cellSize = 30;
+	int nCols = (rightBound - leftBound)/cellSize;
+	int nRows = (downBound - upBound)/cellSize;
+	
+	
+	Board brd;
 	/********************************/
 };
