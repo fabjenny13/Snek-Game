@@ -26,8 +26,10 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	brd(nCols, nRows, cellSize, {(float)leftBound, (float)upBound}, gfx)
+	brd(30,15, gfx)
 {
+	brd.SpawnPoison();
+	brd.SpawnObstacle();
 }
 
 void Game::Go()
@@ -44,17 +46,5 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
-	std::mt19937 rng;
-	std::uniform_int_distribution<int> rDist(0,256);
-	std::uniform_int_distribution<int> gDist(0,256);
-	std::uniform_int_distribution<int> bDist(0,256);
-
-	for (int x = 0; x < nCols; x++)
-	{
-		for (int y = 0; y < nRows; y++)
-		{
-			Color c = { (unsigned char)rDist(rng), (unsigned char)gDist(rng), (unsigned char)bDist(rng) };
-			brd.DrawCell({ x, y }, c);
-		}
-	}
+	brd.Draw();
 }
