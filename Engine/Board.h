@@ -33,22 +33,23 @@ class Board
 
 private:
 	Graphics& gfx;
-	static const int leftBound = 10;
-	static const int rightBound = Graphics::ScreenWidth - leftBound;
-	static const int upBound = 10;
-	static const int downBound = Graphics::ScreenHeight - upBound;
 	Vec2 topLeft = { leftBound, upBound };
 	static const int cellDimensions = 25;
-	static const int nCols = (rightBound - leftBound) / cellDimensions;
-	static const int nRows = (downBound - upBound) / cellDimensions;
-	Cell cells[nCols * nRows];
 
+public:
+	static constexpr int leftBound = 10;
+	static constexpr int rightBound = Graphics::ScreenWidth - leftBound;
+	static constexpr int upBound = 10;
+	static constexpr int downBound = Graphics::ScreenHeight - upBound;
+	static constexpr int nCols = (rightBound - leftBound) / cellDimensions;
+	static constexpr int nRows = (downBound - upBound) / cellDimensions;
+	static constexpr int totalBoardCells = nRows * nCols;
+
+private:
+	Cell cells[nCols * nRows];
 	int nPoison;
 	int maxObstacles;
 	int currObstacles = 0;
-
-public:
-	static constexpr int totalBoardCells = nRows * nCols;
 
 public:
 	Board(int nPoison, int maxObstacles, Graphics& gfx);
@@ -56,7 +57,7 @@ public:
 	void SpawnPoison();
 	void Draw() const;
 	void DrawCell(Location loc, Color c) const;
-	//void RespawnGoal();
+	Location RespawnGoal(Location prev_loc);
 	
 };
 

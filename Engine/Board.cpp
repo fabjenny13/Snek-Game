@@ -83,6 +83,25 @@ void Board::DrawCell(Location loc, Color c) const
 	}
 }
 
+Location Board::RespawnGoal(Location prev_loc)
+{
+	std::random_device rd;
+	std::mt19937 rng(rd());
+	std::uniform_int_distribution<int> xDist(0, nCols - 1);
+	std::uniform_int_distribution<int> yDist(0, nRows - 1);
+	int x = xDist(rng);
+	int y = yDist(rng);
+	while (!(cells[y * nCols + x].IsEmpty()))
+	{
+		x = xDist(rng);
+		y = yDist(rng);
+	}
+	cells[y * nCols + x].ChangeContent(CellContents::Goal);
+	cells[prev_loc.y * nCols + prev_loc.x].RemoveContent();
+
+	return { x,y };
+}
+
 Board::Cell::Cell(Location loc)
 	:
 	loc(loc)
