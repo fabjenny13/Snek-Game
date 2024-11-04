@@ -61,6 +61,7 @@ void Game::UpdateModel()
 		delta_loc = { -1, 0 };
 	}
 
+
 	if (timePassed < cooldownPeriod)
 	{
 		timePassed += stepTime;
@@ -71,10 +72,6 @@ void Game::UpdateModel()
 		snek.Move(delta_loc);
 	}
 
-	if (wnd.kbd.KeyIsPressed(VK_SHIFT))
-	{
-		snek.Grow();
-	}
 }
 
 void Game::ComposeFrame()
