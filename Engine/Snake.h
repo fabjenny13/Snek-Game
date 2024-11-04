@@ -21,7 +21,7 @@ private:
 
 private:
 	static const int maxSegments = Board::totalBoardCells;
-	int curSegments = 0;
+	int curSegments = 1;
 	SnakeSegment segments[maxSegments];
 	Location headLoc;
 	

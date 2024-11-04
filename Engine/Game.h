@@ -24,6 +24,8 @@
 #include "Mouse.h"
 #include "Graphics.h"
 #include "Board.h"
+#include "Snake.h"
+#include "Location.h"
 
 class Game
 {
@@ -44,5 +46,10 @@ private:
 	/********************************/
 	/*  User Variables              */	
 	Board brd;
+	Snake snek;
+	float cooldownPeriod = 2.0f;
+	float timePassed = 0.0f;
+	float stepTime = 0.1f;
+	Location delta_loc = { 1,0 };
 	/********************************/
 };

@@ -36,17 +36,17 @@ Snake::Snake(Location loc)
 
 void Snake::Move(Location delta_loc)
 {
-	segments[0].Move(delta_loc);
-	for (int i = 1; i < curSegments; i++)
+	for (int i = curSegments - 1; i >= 1; i--)
 	{
 		segments[i].Follow(segments[i - 1]);
 	}
+	segments[0].Move(delta_loc);
 }
 
 void Snake::Grow()
 {
 	curSegments++;
-	segments[curSegments] = SnakeSegment(segments[curSegments - 1].GetLocation(), Colors::Green);
+	segments[curSegments - 1] = SnakeSegment(segments[curSegments - 2].GetLocation(), Colors::Green);
 }
 
 void Snake::Draw(Board& brd) const

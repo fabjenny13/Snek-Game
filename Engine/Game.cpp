@@ -26,7 +26,8 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	brd(30,15, gfx)
+	brd(30,15, gfx),
+	snek({ 5,5 })
 {
 	brd.SpawnPoison();
 	brd.SpawnObstacle();
@@ -42,9 +43,42 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+
+	if (wnd.kbd.KeyIsPressed(VK_UP))
+	{
+		delta_loc = { 0, -1 };
+	}
+	else if (wnd.kbd.KeyIsPressed(VK_DOWN))
+	{
+		delta_loc = { 0,1 };
+	}
+	else if (wnd.kbd.KeyIsPressed(VK_RIGHT))
+	{
+		delta_loc = { 1, 0 };
+	}
+	else if (wnd.kbd.KeyIsPressed(VK_LEFT))
+	{
+		delta_loc = { -1, 0 };
+	}
+
+	if (timePassed < cooldownPeriod)
+	{
+		timePassed += stepTime;
+	}
+	else
+	{
+		timePassed = 0.0f;
+		snek.Move(delta_loc);
+	}
+
+	if (wnd.kbd.KeyIsPressed(VK_SHIFT))
+	{
+		snek.Grow();
+	}
 }
 
 void Game::ComposeFrame()
 {
 	brd.Draw();
+	snek.Draw(brd);
 }
