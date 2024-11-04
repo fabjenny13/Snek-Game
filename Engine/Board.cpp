@@ -69,6 +69,20 @@ void Board::Draw() const
 	}
 }
 
+void Board::DrawCell(Location loc, Color c) const
+{
+	int loc_x = loc.x * cellDimensions;
+	int loc_y = loc.y * cellDimensions;
+
+	for (int x = loc_x; x < loc_x + cellDimensions; x++)
+	{
+		for (int y = loc_y; y < loc_y + cellDimensions; y++)
+		{
+			gfx.PutPixel((int)topLeft.x + x, (int)topLeft.y + y, c);
+		}
+	}
+}
+
 Board::Cell::Cell(Location loc)
 	:
 	loc(loc)
@@ -93,7 +107,6 @@ void Board::Cell::Draw(Vec2 topLeft, Graphics& gfx) const
 		c = Colors::Yellow;
 		break;
 	default:
-		c = Colors::Black;
 		break;
 	}
 

@@ -47,13 +47,15 @@ private:
 	int maxObstacles;
 	int currObstacles = 0;
 
-
+public:
+	static constexpr int totalBoardCells = nRows * nCols;
 
 public:
 	Board(int nPoison, int maxObstacles, Graphics& gfx);
 	void SpawnObstacle();
 	void SpawnPoison();
 	void Draw() const;
+	void DrawCell(Location loc, Color c) const;
 	//void RespawnGoal();
 	
 };
