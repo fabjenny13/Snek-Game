@@ -26,7 +26,7 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	brd(30,15, gfx),
+	brd(50,15, gfx),
 	snek({ 5,5 }), 
 	goal({ 10,10 })
 {
@@ -62,12 +62,7 @@ void Game::UpdateModel()
 		delta_loc = { -1, 0 };
 	}
 
-	if (wnd.kbd.KeyIsPressed(VK_SHIFT))
-	{
-		grow = true;
-	}
-	if
-		(timePassed < cooldownPeriod)
+	if(timePassed < cooldownPeriod)
 	{
 		timePassed += stepTime;
 	}
@@ -75,13 +70,16 @@ void Game::UpdateModel()
 	{
 		timePassed = 0.0f;
 		snek.Move(delta_loc);
-		if (grow)
-		{
-			grow = false;
-			goal.Respawn(brd);
-		}
 	}
-
+	if (goal.IsEaten(snek.GetHeadLocation()))
+	{
+		goal.Respawn(brd);
+		snek.Grow();
+	}
+	else if (brd.IsPoisonConsumed(snek.GetHeadLocation()) && minCoolDown < cooldownPeriod)
+	{
+		cooldownPeriod -= 0.05f;
+	}
 }
 
 void Game::ComposeFrame()

@@ -23,7 +23,6 @@ private:
 	static const int maxSegments = Board::totalBoardCells;
 	int curSegments = 1;
 	SnakeSegment segments[maxSegments];
-	Location headLoc;
 	
 
 public:
@@ -32,6 +31,7 @@ public:
 	void Move(Location delta_loc);
 	void Grow();
 	void Draw(Board& brd) const;
+	Location GetHeadLocation() const;
 
 
 };

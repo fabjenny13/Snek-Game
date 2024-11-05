@@ -8,5 +8,6 @@ public:
 	Location(int x, int y);
 	Location operator+(Location rhs) const;
 	Location& operator+=(Location rhs);
+	bool operator==(Location rhs) const;
 };
 

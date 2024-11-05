@@ -16,3 +16,8 @@ void Goal::Draw(Board& brd) const
 {
 	brd.DrawCell(loc, c);
 }
+
+bool Goal::IsEaten(Location snekLoc) const
+{
+	return snekLoc == loc;
+}

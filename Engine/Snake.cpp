@@ -28,10 +28,8 @@ void Snake::SnakeSegment::Move(Location delta_loc)
 }
 
 Snake::Snake(Location loc)
-	:
-	headLoc(loc)
 {
-	segments[0] = SnakeSegment(headLoc, Colors::Yellow);
+	segments[0] = SnakeSegment(loc, Colors::Yellow);
 }
 
 void Snake::Move(Location delta_loc)
@@ -55,4 +53,9 @@ void Snake::Draw(Board& brd) const
 	{
 		brd.DrawCell(segments[i].GetLocation(), segments[i].GetColor());
 	}
+}
+
+Location Snake::GetHeadLocation() const
+{
+	return segments[0].GetLocation();
 }

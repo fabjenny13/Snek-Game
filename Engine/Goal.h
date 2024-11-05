@@ -14,5 +14,6 @@ public:
 	Goal(Location loc);
 	void Respawn(Board& brd);
 	void Draw(Board& brd) const;
+	bool IsEaten(Location snekLoc) const;
 };
 

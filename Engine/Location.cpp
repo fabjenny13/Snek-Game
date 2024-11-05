@@ -16,3 +16,8 @@ Location& Location::operator+=(Location rhs)
 {
     return *this = *this + rhs;
 }
+
+bool Location::operator==(Location rhs) const
+{
+    return(x == rhs.x && y == rhs.y);
+}

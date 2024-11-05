@@ -57,6 +57,7 @@ public:
 	void SpawnPoison();
 	void Draw() const;
 	void DrawCell(Location loc, Color c) const;
+	bool IsPoisonConsumed(Location snekLoc);
 	Location RespawnGoal(Location prev_loc);
 	
 };

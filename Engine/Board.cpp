@@ -83,6 +83,17 @@ void Board::DrawCell(Location loc, Color c) const
 	}
 }
 
+bool Board::IsPoisonConsumed(Location snekLoc) 
+{
+	int checkIndex = snekLoc.y * nCols + snekLoc.x;
+	bool consumed = cells[checkIndex].HasPoison();
+	if (consumed)
+	{
+		cells[checkIndex].RemoveContent();
+	}
+	return consumed;
+}
+
 Location Board::RespawnGoal(Location prev_loc)
 {
 	std::random_device rd;
