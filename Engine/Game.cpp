@@ -44,41 +44,54 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	if (!gameOver)
+	{
+		if (wnd.kbd.KeyIsPressed(VK_UP))
+		{
+			delta_loc = { 0, -1 };
+		}
+		else if (wnd.kbd.KeyIsPressed(VK_DOWN))
+		{
+			delta_loc = { 0,1 };
+		}
+		else if (wnd.kbd.KeyIsPressed(VK_RIGHT))
+		{
+			delta_loc = { 1, 0 };
+		}
+		else if (wnd.kbd.KeyIsPressed(VK_LEFT))
+		{
+			delta_loc = { -1, 0 };
+		}
 
-	if (wnd.kbd.KeyIsPressed(VK_UP))
-	{
-		delta_loc = { 0, -1 };
-	}
-	else if (wnd.kbd.KeyIsPressed(VK_DOWN))
-	{
-		delta_loc = { 0,1 };
-	}
-	else if (wnd.kbd.KeyIsPressed(VK_RIGHT))
-	{
-		delta_loc = { 1, 0 };
-	}
-	else if (wnd.kbd.KeyIsPressed(VK_LEFT))
-	{
-		delta_loc = { -1, 0 };
-	}
+		Location nextHeadLocation = snek.GetHeadLocation() + delta_loc;
+		if (goal.IsEaten(snek.GetHeadLocation()))
+		{
+			goal.Respawn(brd);
+			snek.Grow();
+		}
+		else if (brd.IsPoisonConsumed(snek.GetHeadLocation()) && minCoolDown < cooldownPeriod)
+		{
+			cooldownPeriod -= 0.05f;
+		}
 
-	if(timePassed < cooldownPeriod)
-	{
-		timePassed += stepTime;
-	}
-	else
-	{
-		timePassed = 0.0f;
-		snek.Move(delta_loc);
-	}
-	if (goal.IsEaten(snek.GetHeadLocation()))
-	{
-		goal.Respawn(brd);
-		snek.Grow();
-	}
-	else if (brd.IsPoisonConsumed(snek.GetHeadLocation()) && minCoolDown < cooldownPeriod)
-	{
-		cooldownPeriod -= 0.05f;
+
+		if (timePassed < cooldownPeriod)
+		{
+			timePassed += stepTime;
+		}
+		else
+		{
+			timePassed = 0.0f;
+			if (brd.IsObstacleHit(nextHeadLocation) || snek.CollidedWithSelf(nextHeadLocation) || brd.IsWallHit(nextHeadLocation))
+			{
+				gameOver = true;
+			}
+			else
+			{
+				snek.Move(delta_loc);
+			}
+		}
+
 	}
 }
 

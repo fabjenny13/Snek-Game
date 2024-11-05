@@ -59,3 +59,15 @@ Location Snake::GetHeadLocation() const
 {
 	return segments[0].GetLocation();
 }
+
+bool Snake::CollidedWithSelf(Location nextHeadLoc) const
+{
+	for (int i = 1; i < curSegments; i++)
+	{
+		if (nextHeadLoc == segments[i].GetLocation())
+		{
+			return true;
+		}
+	}
+	return false;
+}

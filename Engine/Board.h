@@ -2,6 +2,8 @@
 #include "Location.h"
 #include "Graphics.h"
 #include "Vec2.h"
+
+
 #include <random>
 
 class Board
@@ -58,6 +60,8 @@ public:
 	void Draw() const;
 	void DrawCell(Location loc, Color c) const;
 	bool IsPoisonConsumed(Location snekLoc);
+	bool IsObstacleHit(Location snekLoc);
+	bool IsWallHit(Location snekLoc);
 	Location RespawnGoal(Location prev_loc);
 	
 };

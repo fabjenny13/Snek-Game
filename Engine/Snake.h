@@ -32,6 +32,7 @@ public:
 	void Grow();
 	void Draw(Board& brd) const;
 	Location GetHeadLocation() const;
+	bool CollidedWithSelf(Location nextHeadLoc) const;
 
 
 };

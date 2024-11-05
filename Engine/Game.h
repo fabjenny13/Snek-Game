@@ -54,5 +54,6 @@ private:
 	float timePassed = 0.0f;
 	float stepTime = 0.1f;
 	Location delta_loc = { 1,0 };
+	bool gameOver = false;
 	/********************************/
 };

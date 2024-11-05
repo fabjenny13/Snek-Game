@@ -94,6 +94,16 @@ bool Board::IsPoisonConsumed(Location snekLoc)
 	return consumed;
 }
 
+bool Board::IsObstacleHit(Location snekLoc)
+{
+	return cells[snekLoc.y * nCols + snekLoc.x].HasObstacle();
+}
+
+bool Board::IsWallHit(Location snekLoc)
+{
+	return (snekLoc.x < 0 || snekLoc.x > nCols - 1 || snekLoc.y < 0 || snekLoc.y > nRows - 1);
+}
+
 Location Board::RespawnGoal(Location prev_loc)
 {
 	std::random_device rd;
