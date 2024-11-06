@@ -21,6 +21,7 @@
 #include "MainWindow.h"
 #include "Game.h"
 #include <random>
+#include "SpriteCodex.h"
 
 Game::Game( MainWindow& wnd )
 	:
@@ -67,6 +68,7 @@ void Game::UpdateModel()
 		if (goal.IsEaten(snek.GetHeadLocation()))
 		{
 			goal.Respawn(brd);
+			brd.SpawnObstacle();
 			snek.Grow();
 		}
 		else if (brd.IsPoisonConsumed(snek.GetHeadLocation()) && minCoolDown < cooldownPeriod)
@@ -100,4 +102,9 @@ void Game::ComposeFrame()
 	brd.Draw();
 	snek.Draw(brd);
 	goal.Draw(brd);
+	if (gameOver)
+	{
+		SpriteCodex::DrawGameOver(Graphics::ScreenWidth / 2 - 50, Graphics::ScreenHeight / 2 - 50, gfx);
+	}
+
 }
